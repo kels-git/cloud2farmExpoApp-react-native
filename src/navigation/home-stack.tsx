@@ -1,7 +1,7 @@
-import React from 'react';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {HomeStackParamList} from '../typings/navigation';
-import {SCREENS} from '../constants/screens';
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import React from "react";
+
+import { SCREENS } from "../constants/screens";
 import {
   IndexChartViewScreen,
   IndexDashBoardScreen,
@@ -10,7 +10,8 @@ import {
   IndexTestScreen,
   IndexTrendingScreen,
   IndexUserHomeAccount,
-} from '../pages';
+} from "../pages";
+import { HomeStackParamList } from "../typings/navigation";
 
 // Import your screen components here
 
@@ -23,7 +24,8 @@ const HomeStackNavigator = () => {
       screenOptions={{
         headerShown: false,
         gestureEnabled: true,
-      }}>
+      }}
+    >
       <HomeStack.Screen
         name={SCREENS.HOME_SCREEN}
         component={IndexUserHomeAccount}
@@ -51,7 +53,7 @@ const HomeStackNavigator = () => {
         name={SCREENS.GRIDVIEW_SCREEN}
         component={IndexGridViewScreen}
       />
-        <HomeStack.Screen
+      <HomeStack.Screen
         name={SCREENS.TEST_SCREEN}
         component={IndexTestScreen}
       />

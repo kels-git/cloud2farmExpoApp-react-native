@@ -1,12 +1,13 @@
 import React from "react";
-import { useTailwind } from "tailwind-rn/dist";
-import { COLORS } from "../../constants/colors";
-import { ResponsiveUi } from "../responsive-ui";
-import ContainerWrapper from "../wrappers/ContainerWrapper";
 import { ImageBackground, ScrollView, Image } from "react-native";
+import { useTailwind } from "tailwind-rn/dist";
+
 import { BackgroundImg, Cloudfarmlogo } from "../../assets";
+import { COLORS } from "../../constants/colors";
 import { MetricsSizes } from "../../helpers/variables";
 import { useOrientation } from "../../pages/useOrientation";
+import { ResponsiveUi } from "../responsive-ui";
+import ContainerWrapper from "../wrappers/ContainerWrapper";
 
 const GenesyssApp = () => {
   const tailwind = useTailwind();
@@ -57,7 +58,7 @@ const GenesyssApp = () => {
                 },
               ]}
               source={Cloudfarmlogo}
-              resizeMode={"contain"}
+              resizeMode="contain"
             />
           </ContainerWrapper>
 

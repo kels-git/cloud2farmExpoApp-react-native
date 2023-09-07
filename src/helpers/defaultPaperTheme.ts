@@ -1,5 +1,6 @@
-import {DefaultTheme, Provider as PaperProvider} from 'react-native-paper';
-import {COLORS} from '../constants/colors';
+import { DefaultTheme } from "react-native-paper";
+
+import { COLORS } from "../constants/colors";
 
 export const theme = {
   ...DefaultTheme,
@@ -11,13 +12,13 @@ export const theme = {
   fonts: {
     ...DefaultTheme.fonts,
     regular: {
-      fontFamily: 'Inter-Regular', // Set your desired font family
+      fontFamily: "Inter-Regular", // Set your desired font family
     },
     medium: {
-      fontFamily: 'Inter-Medium',
-      'semi-bold': 'Inter-SemiBold', // Set your desired font family
+      fontFamily: "Inter-Medium",
+      "semi-bold": "Inter-SemiBold", // Set your desired font family
     },
-    bold: 'Inter-Bold',
+    bold: "Inter-Bold",
     // Add more font styles as needed
   },
 };

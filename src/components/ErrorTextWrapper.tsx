@@ -1,7 +1,8 @@
-import React from 'react';
-import {useTailwind} from 'tailwind-rn';
-import {ResponsiveUi} from './responsive-ui';
-import {COLORS} from '../constants/colors';
+import React from "react";
+import { useTailwind } from "tailwind-rn";
+
+import { ResponsiveUi } from "./responsive-ui";
+import { COLORS } from "../constants/colors";
 
 interface ErrorProps {
   hasError: boolean;
@@ -22,7 +23,8 @@ const ErrorTextWrapper: React.FC<ErrorProps> = ({
           regular
           h7
           color={COLORS.ERROR}
-          style={[tailwind('mb-7 -mt-3')]}>
+          style={[tailwind("mb-7 -mt-3")]}
+        >
           {errorMessage}
         </ResponsiveUi.Text>
       ) : null}

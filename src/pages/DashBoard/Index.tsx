@@ -1,28 +1,29 @@
 import React, { useEffect, useState } from "react";
-import ContainerWrapper from "../../components/wrappers/ContainerWrapper";
-import { ResponsiveUi } from "../../components/responsive-ui";
-import { SCREENS } from "../../constants/screens";
-import { RootStackScreenProps } from "../../typings/navigation";
 import {
   SafeAreaView,
   ScrollView,
   TouchableOpacity,
   Image,
 } from "react-native";
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import { useTailwind } from "tailwind-rn";
+
+import { NodataDisplay } from "../../assets";
+import CardGridComponent from "../../components/CardGridComponent";
+import HeaderComponent from "../../components/HeaderComponent";
+import { ModalCategoryComponent } from "../../components/ModalCategoryComponent";
+import { StickyBottomComponent } from "../../components/StickyBottomComponent";
+import { ResponsiveUi } from "../../components/responsive-ui";
+import ContainerWrapper from "../../components/wrappers/ContainerWrapper";
 import { COLORS } from "../../constants/colors";
+import { SCREENS } from "../../constants/screens";
 import {
   DashBoardOverviewTest,
   MetricsSizes,
   PondHeader,
   PondsData,
 } from "../../helpers/variables";
-import { useTailwind } from "tailwind-rn";
-import HeaderComponent from "../../components/HeaderComponent";
-import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-import { ModalCategoryComponent } from "../../components/ModalCategoryComponent";
-import CardGridComponent from "../../components/CardGridComponent";
-import { NodataDisplay } from "../../assets";
-import { StickyBottomComponent } from "../../components/StickyBottomComponent";
+import { RootStackScreenProps } from "../../typings/navigation";
 
 interface pondDataType {
   name: string;
@@ -52,7 +53,7 @@ const IndexDashBoardScreen = ({
   const [tempWaterData, setTempWaterData] = useState<
     { watertemp: string; reservoirwaterlevel: string }[]
   >([]);
-  const [selectedTempWater, setSelectedTempWater] = useState<
+  const [selectedTempWater] = useState<
     { watertemp?: string; reservoirwaterlevel?: string }[]
   >([]);
 
@@ -70,6 +71,8 @@ const IndexDashBoardScreen = ({
       if (selectedPondData) {
         setSelectedPondDataDetails(selectedPondData.details);
         console.log("this details-> ", selectedPondDataDetails);
+      } else {
+        setSelectedPondDataDetails([]);
       }
     }
   }
@@ -88,7 +91,7 @@ const IndexDashBoardScreen = ({
     setTempWaterData(newWaterTempData);
   }, [selectedPondDataDetails]);
 
-  console.log("=====>", selectedTempWater);
+  // console.log("=====>", selectedTempWater);
 
   return (
     <SafeAreaView
@@ -102,7 +105,7 @@ const IndexDashBoardScreen = ({
         <ModalCategoryComponent
           categories={PondsData}
           visible={isPondVisible}
-          modalTitle={"Select"}
+          modalTitle="Select"
           setData={handlePondDataSelected}
           setVisibility={() => changeModaVisibility(false)}
           changeModaVisibility={changeModaVisibility}
@@ -113,14 +116,15 @@ const IndexDashBoardScreen = ({
             bold
             h6
             color={COLORS.GREY}
-            style={[tailwind("mb-2")]}
+            style={[tailwind("mb-2 w-full"), {marginLeft: MetricsSizes.tiny + 1}]}
           >
             Select Your Ponds/Properties
           </ResponsiveUi.Text>
+          <ContainerWrapper style={[tailwind('mb-5 absolute mt-5 w-full'),{}]}>
           <TouchableOpacity
             style={[
-              tailwind("flex-row flex-1 rounded justify-between"),
-              { padding: 4 },
+              tailwind("flex-row rounded justify-between"),
+              { padding:MetricsSizes.tiny - 1 },
             ]}
             onPress={() => {
               changeModaVisibility(true);
@@ -135,25 +139,29 @@ const IndexDashBoardScreen = ({
               }
               tailwind="font-regular"
             >
-              {"Select"}
+              Select
             </ResponsiveUi.Text>
             <MaterialCommunityIcons
               size={25}
               color={COLORS.TEXT_GREY}
-              name={"chevron-right"}
+              name="chevron-right"
               style={[tailwind("self-center")]}
             />
           </TouchableOpacity>
+          </ContainerWrapper>
+       
           <ContainerWrapper
             style={[tailwind("items-center justify-center mt-10")]}
           >
             <ResponsiveUi.Text h2 bold color={COLORS.HIGH_GRAD_BLACK}>
-              {selectedPondData}
+              {selectedPondDataDetails.length === 0
+                ? `No Data Available`
+                : selectedPondData}
             </ResponsiveUi.Text>
           </ContainerWrapper>
         </ContainerWrapper>
 
-        {selectedPondData === "" ? (
+        {selectedPondData === "" || selectedPondDataDetails.length === 0 ? (
           <ContainerWrapper
             style={[
               tailwind("flex-1 justify-center items-center mt-10"),
@@ -162,7 +170,7 @@ const IndexDashBoardScreen = ({
           >
             <Image
               source={NodataDisplay}
-              resizeMode={"cover"}
+              resizeMode="cover"
               style={[
                 tailwind("mt-2 mb-20"),
                 {
@@ -173,12 +181,10 @@ const IndexDashBoardScreen = ({
             />
           </ContainerWrapper>
         ) : (
-          <ContainerWrapper>
+         
             <ContainerWrapper
               style={[
-                tailwind(
-                  "flex-1 justify-center items-center mt-5 h-full mb-5"
-                ),
+                tailwind("flex-1 justify-center items-center mt-5 h-full mb-5"),
                 {},
               ]}
             >
@@ -196,8 +202,8 @@ const IndexDashBoardScreen = ({
                 {selectedPondDataDetails.map((item: any, index: any) => (
                   <>
                     <CardGridComponent
-                      isDashBoard={true}
-                      key={item.title}
+                      isDashBoard
+                      key={index}
                       gridTitle={item.title}
                       gridStatus={item.status}
                       gridVolume={item.volume}
@@ -215,7 +221,7 @@ const IndexDashBoardScreen = ({
                 ))}
               </ContainerWrapper>
             </ContainerWrapper>
-          </ContainerWrapper>
+         
         )}
       </ScrollView>
       <StickyBottomComponent />

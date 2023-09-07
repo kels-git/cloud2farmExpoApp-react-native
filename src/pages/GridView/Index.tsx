@@ -1,21 +1,22 @@
-import React, {useState} from 'react';
-import ContainerWrapper from '../../components/wrappers/ContainerWrapper';
-import {SCREENS} from '../../constants/screens';
-import {RootStackScreenProps} from '../../typings/navigation';
-import {SafeAreaView, ScrollView} from 'react-native';
-import {COLORS} from '../../constants/colors';
-import {useTailwind} from 'tailwind-rn';
-import HeaderComponent from '../../components/HeaderComponent';
-import {DataTable} from 'react-native-paper';
-import {GridData} from '../../helpers/variables';
-import {StickyBottomComponent} from '../../components/StickyBottomComponent';
+import React, { useState } from "react";
+import { SafeAreaView, ScrollView } from "react-native";
+import { DataTable } from "react-native-paper";
+import { useTailwind } from "tailwind-rn";
+
+import HeaderComponent from "../../components/HeaderComponent";
+import { StickyBottomComponent } from "../../components/StickyBottomComponent";
+import ContainerWrapper from "../../components/wrappers/ContainerWrapper";
+import { COLORS } from "../../constants/colors";
+import { SCREENS } from "../../constants/screens";
+import { GridData } from "../../helpers/variables";
+import { RootStackScreenProps } from "../../typings/navigation";
 
 const IndexGridViewScreen = ({
   navigation,
   route,
 }: RootStackScreenProps<SCREENS.GRIDVIEW_SCREEN>) => {
   const tailwind = useTailwind();
-  const {title}: any = route.params;
+  const { title }: any = route.params;
   const [page, setPage] = useState<number>(0);
   const [numberOfItemsPerPageList] = useState([5, 6, 7, 8, 9, 10]);
   const [itemsPerPage, onItemsPerPageChange] = useState(
@@ -31,14 +32,17 @@ const IndexGridViewScreen = ({
 
   return (
     <SafeAreaView
-      style={[tailwind('flex-1'), {backgroundColor: COLORS.LIGHT_GREY}]}>
+      style={[tailwind("flex-1"), { backgroundColor: COLORS.LIGHT_GREY }]}
+    >
       <ScrollView
         contentContainerStyle={{}}
-        showsVerticalScrollIndicator={false}>
+        showsVerticalScrollIndicator={false}
+      >
         <HeaderComponent title={title} />
 
         <ContainerWrapper
-          style={[tailwind('flex-1'), {backgroundColor: COLORS.WHITE}]}>
+          style={[tailwind("flex-1"), { backgroundColor: COLORS.WHITE }]}
+        >
           <DataTable>
             <DataTable.Header>
               <DataTable.Title>15 Mins</DataTable.Title>
@@ -47,7 +51,7 @@ const IndexGridViewScreen = ({
               <DataTable.Title numeric>Max</DataTable.Title>
             </DataTable.Header>
 
-            {GridData.slice(from, to).map(item => (
+            {GridData.slice(from, to).map((item) => (
               <DataTable.Row key={item.key}>
                 <DataTable.Cell>{item.time}</DataTable.Cell>
                 <DataTable.Cell numeric>
@@ -61,18 +65,16 @@ const IndexGridViewScreen = ({
             <DataTable.Pagination
               page={page}
               numberOfPages={Math.ceil(GridData.length / itemsPerPage)}
-              onPageChange={page => setPage(page)}
+              onPageChange={(page) => setPage(page)}
               label={`${from + 1}-${to} of ${GridData.length}`}
               numberOfItemsPerPageList={numberOfItemsPerPageList}
               numberOfItemsPerPage={itemsPerPage}
               onItemsPerPageChange={onItemsPerPageChange}
               showFastPaginationControls
-              selectPageDropdownLabel={'Rows per page'}
+              selectPageDropdownLabel="Rows per page"
             />
           </DataTable>
         </ContainerWrapper>
-
-      
       </ScrollView>
       <StickyBottomComponent />
     </SafeAreaView>

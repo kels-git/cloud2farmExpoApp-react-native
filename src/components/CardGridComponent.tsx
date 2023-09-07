@@ -1,20 +1,17 @@
-import React, { useCallback } from "react";
-import { useTailwind } from "tailwind-rn";
-import { COLORS } from "../constants/colors";
-import { MetricsSizes } from "../helpers/variables";
-import { ResponsiveUi } from "./responsive-ui";
-import ContainerWrapper from "./wrappers/ContainerWrapper";
+import React from "react";
 import {
   GestureResponderEvent,
   Platform,
   TouchableOpacity,
   Image,
   View,
-  Text
 } from "react-native";
-import { useFonts } from "expo-font";
-import AppLoading from "expo-app-loading";
-import * as SplashScreen from 'expo-splash-screen';
+import { useTailwind } from "tailwind-rn";
+
+import { ResponsiveUi } from "./responsive-ui";
+import ContainerWrapper from "./wrappers/ContainerWrapper";
+import { COLORS } from "../constants/colors";
+import { MetricsSizes } from "../helpers/variables";
 
 interface CardGridOverViewProps {
   gridTitle?: string;
@@ -44,7 +41,6 @@ const CardGridComponent: React.FC<CardGridOverViewProps> = ({
   gridWaterReservoir,
 }) => {
   const tailwind = useTailwind();
-
 
   return isDashBoard ? (
     <>
@@ -86,7 +82,7 @@ const CardGridComponent: React.FC<CardGridOverViewProps> = ({
                     <Image
                       key={index} // Make sure to add a unique key for each icon
                       source={item.type}
-                      resizeMode={"cover"}
+                      resizeMode="cover"
                       style={{
                         width: MetricsSizes.xlarge - MetricsSizes.small,
                         height: MetricsSizes.xlarge - MetricsSizes.small,
@@ -165,13 +161,13 @@ const CardGridComponent: React.FC<CardGridOverViewProps> = ({
               key={index}
               style={[
                 tailwind(
-                  "pt-7 pb-7 pl-7 pr-7 items-center justify-center rounded-lg"
+                  "pt-7 pb-7 pl-7 pr-7 items-center justify-center rounded-lg",
                 ),
                 { backgroundColor: COLORS.GREEN_BG },
               ]}
             >
               <ResponsiveUi.Text h7 color={COLORS.WHITE}>
-                {"Temperature"}
+                Temperature
               </ResponsiveUi.Text>
               <ResponsiveUi.Text h2 color={COLORS.WHITE}>
                 {tempItem.watertemp}
@@ -188,7 +184,7 @@ const CardGridComponent: React.FC<CardGridOverViewProps> = ({
               ]}
             >
               <ResponsiveUi.Text h7 color={COLORS.WHITE}>
-                {"Reservoir Water level"}
+                Reservoir Water level
               </ResponsiveUi.Text>
               <ResponsiveUi.Text h2 color={COLORS.WHITE}>
                 {tempWater.reservoirwaterlevel}
@@ -230,7 +226,7 @@ const CardGridComponent: React.FC<CardGridOverViewProps> = ({
       >
         <Image
           source={gridIcon}
-          resizeMode={"cover"}
+          resizeMode="cover"
           style={{
             width: MetricsSizes.large + MetricsSizes.regular,
             height: MetricsSizes.large + MetricsSizes.regular,
@@ -239,11 +235,10 @@ const CardGridComponent: React.FC<CardGridOverViewProps> = ({
         <ResponsiveUi.Text
           h7
           color={COLORS.MEDIUM_BLACK}
-          style={[tailwind("mt-2 font-bold"),]}
+          style={[tailwind("mt-2 font-bold")]}
         >
           {gridTitle}
         </ResponsiveUi.Text>
-       
       </View>
     </TouchableOpacity>
   );

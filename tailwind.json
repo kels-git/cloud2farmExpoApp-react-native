@@ -158,6 +158,21 @@
 			"marginTop": 20
 		}
 	},
+	"mr-1": {
+		"style": {
+			"marginRight": 4
+		}
+	},
+	"ml-1": {
+		"style": {
+			"marginLeft": 4
+		}
+	},
+	"mr-1.5": {
+		"style": {
+			"marginRight": 6
+		}
+	},
 	"flex": {
 		"style": {
 			"display": "flex"
@@ -446,16 +461,6 @@
 			"fontFamily": "Inter-Regular"
 		}
 	},
-	"font-medium": {
-		"style": {
-			"fontWeight": "500"
-		}
-	},
-	"font-normal": {
-		"style": {
-			"fontWeight": "400"
-		}
-	},
 	"italic": {
 		"style": {
 			"fontStyle": "italic"
@@ -483,11 +488,6 @@
 		"style": {
 			"--tw-text-opacity": 1,
 			"color": "rgb(255 255 255 / var(--tw-text-opacity))"
-		}
-	},
-	"underline": {
-		"style": {
-			"textDecorationLine": "underline"
 		}
 	}
 }
