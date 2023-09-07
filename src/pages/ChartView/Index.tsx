@@ -1,21 +1,19 @@
+import { Buffer as NodeBuffer } from "buffer";
+import ExcelJS from "exceljs";
+import * as FileSystem from "expo-file-system";
+import * as Sharing from "expo-sharing";
 import React from "react";
+import { SafeAreaView, ScrollView, View } from "react-native";
+import { BarChart } from "react-native-gifted-charts";
+import { useTailwind } from "tailwind-rn";
+
+import HeaderComponent from "../../components/HeaderComponent";
+import { StickyBottomComponent } from "../../components/StickyBottomComponent";
+import { ResponsiveUi } from "../../components/responsive-ui";
 import ContainerWrapper from "../../components/wrappers/ContainerWrapper";
+import { COLORS } from "../../constants/colors";
 import { SCREENS } from "../../constants/screens";
 import { RootStackScreenProps } from "../../typings/navigation";
-import { SafeAreaView, ScrollView, View } from "react-native";
-import { COLORS } from "../../constants/colors";
-import { useTailwind } from "tailwind-rn";
-import HeaderComponent from "../../components/HeaderComponent";
-import { ResponsiveUi } from "../../components/responsive-ui";
-import { BarChart } from "react-native-gifted-charts";
-import { StickyBottomComponent } from "../../components/StickyBottomComponent";
-import * as FileSystem from "expo-file-system";
-// ExcelJS
-import ExcelJS from "exceljs";
-// Share excel via share dialog
-import * as Sharing from "expo-sharing";
-// From @types/node/buffer
-import { Buffer as NodeBuffer } from "buffer";
 
 const IndexChartViewScreen = ({
   navigation,
@@ -25,17 +23,17 @@ const IndexChartViewScreen = ({
   const { title }: any = route.params;
   const barData = [
     { id: 1, value: 250, label: "Mon" },
-    { id: 2, value: 500, label: "Tue", frontColor: "#177AD5" },
+    { id: 2, value: 500, label: "Tue", frontColor: COLORS.PRIMARY_END_COLORS },
     { id: 3, value: 745, label: "Wed" },
-    { id: 4, value: 320, label: "Thu", frontColor: "#177AD5" },
+    { id: 4, value: 320, label: "Thu", frontColor: COLORS.PRIMARY_END_COLORS },
     { id: 5, value: 600, label: "Fri" },
-    { id: 6, value: 256, label: "Sat", frontColor: "#177AD5" },
+    { id: 6, value: 256, label: "Sat", frontColor: COLORS.PRIMARY_END_COLORS },
     { id: 7, value: 300, label: "Sun" },
-    { id: 8, value: 400, label: "Mon", frontColor: "#177AD5" },
+    { id: 8, value: 400, label: "Mon", frontColor: COLORS.PRIMARY_END_COLORS },
     { id: 9, value: 400, label: "Tue" },
-    { id: 10, value: 256, label: "Wed", frontColor: "#177AD5" },
+    { id: 10, value: 256, label: "Wed", frontColor: COLORS.PRIMARY_END_COLORS },
     { id: 11, value: 300, label: "Thu" },
-    { id: 12, value: 650, label: "Fri", frontColor: "#177AD5" },
+    { id: 12, value: 650, label: "Fri", frontColor: COLORS.PRIMARY_END_COLORS },
     { id: 13, value: 650, label: "Sat" },
     { id: 14, value: 900, label: "Sun" },
     { id: 15, value: 432, label: "Mon" },
@@ -74,7 +72,7 @@ const IndexChartViewScreen = ({
 
       // Add a sheet to work on
       const worksheet = workbook.addWorksheet("My Sheet", {});
-      
+
       // Just some columns as used on ExcelJS Readme
       worksheet.columns = [
         { header: "Id", key: "id", width: 10 },
@@ -161,7 +159,7 @@ const IndexChartViewScreen = ({
           >
             <ResponsiveUi.Button
               bold
-              gradient={true}
+              gradient
               // loading={loading}
               title="Export Report"
               colors={[COLORS.PRIMARY_START_COLOR, COLORS.PRIMARY_END_COLORS]}

@@ -1,8 +1,9 @@
-import React from 'react';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {PrivateStack} from './private-stack';
-import {StackParams} from '../typings/navigation';
-import {SCREENS} from '../constants/screens';
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import React from "react";
+
+import { PrivateStack } from "./private-stack";
+import { SCREENS } from "../constants/screens";
+import { StackParams } from "../typings/navigation";
 
 const Stack = createNativeStackNavigator<StackParams>();
 
@@ -11,7 +12,8 @@ export const RootNavigation = () => {
     <>
       <Stack.Navigator
         initialRouteName={SCREENS.MAIN_STACK}
-        screenOptions={{headerShown: false}}>
+        screenOptions={{ headerShown: false }}
+      >
         <Stack.Screen name={SCREENS.MAIN_STACK} component={PrivateStack} />
       </Stack.Navigator>
     </>

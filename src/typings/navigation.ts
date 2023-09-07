@@ -1,5 +1,6 @@
-import {SCREENS} from '../constants/screens';
-import {ParamListBase, RouteProp} from '@react-navigation/native';
+import { ParamListBase, RouteProp } from "@react-navigation/native";
+
+import { SCREENS } from "../constants/screens";
 
 interface ISubNavigator<T extends ParamListBase, K extends keyof T> {
   screen: K;

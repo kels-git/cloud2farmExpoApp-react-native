@@ -1,12 +1,11 @@
-import {Dimensions} from 'react-native';
-
+import { Dimensions } from "react-native";
 import {
   heightPercentageToDP,
   widthPercentageToDP,
-} from 'react-native-responsive-screen';
+} from "react-native-responsive-screen";
 
 export const useAppDimensions = () => {
-  const dimension = Dimensions.get('screen');
+  const dimension = Dimensions.get("screen");
 
   return dimension.width < dimension.height || dimension.width < 768
     ? {

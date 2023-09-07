@@ -1,10 +1,11 @@
-import React from 'react';
-import {TouchableOpacity} from 'react-native';
-import {LinearGradient} from 'expo-linear-gradient';
-import {useTailwind} from 'tailwind-rn';
-import {COLORS} from '../constants/colors';
-import {ResponsiveUi} from './responsive-ui';
-import {MetricsSizes} from '../helpers/variables';
+import { LinearGradient } from "expo-linear-gradient";
+import React from "react";
+import { TouchableOpacity } from "react-native";
+import { useTailwind } from "tailwind-rn";
+
+import { ResponsiveUi } from "./responsive-ui";
+import { COLORS } from "../constants/colors";
+import { MetricsSizes } from "../helpers/variables";
 
 interface gradientprops {
   title: string;
@@ -20,22 +21,24 @@ export const LightGradientComponent: React.FC<gradientprops> = ({
   return (
     <TouchableOpacity onPress={action}>
       <LinearGradient
-        colors={['#A88BEB', '#F8CEEC']}
-        style={[tailwind('mt-5 mb-5 rounded-lg w-full')]}>
+        colors={["#A88BEB", "#F8CEEC"]}
+        style={[tailwind("mt-5 mb-5 rounded-lg w-full")]}
+      >
         <ResponsiveUi.Text
           h3
           bold
           color={COLORS.BLACK}
           style={[
             {
-              marginHorizontal: title.includes('Trending')
+              marginHorizontal: title.includes("Trending")
                 ? MetricsSizes.large - 6
-                : title.includes('Alarm')
+                : title.includes("Alarm")
                 ? MetricsSizes.large + MetricsSizes.small
                 : MetricsSizes.regular + 1,
               marginVertical: MetricsSizes.regular + 1,
             },
-          ]}>
+          ]}
+        >
           {title}
         </ResponsiveUi.Text>
       </LinearGradient>

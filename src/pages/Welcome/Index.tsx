@@ -1,12 +1,13 @@
-import React, {useCallback, useState} from 'react';
-import {useTailwind} from 'tailwind-rn';
-import {COLORS} from '../../constants/colors';
-import {RootStackScreenProps} from '../../typings/navigation';
-import {SCREENS} from '../../constants/screens';
-import ContainerWrapper from '../../components/wrappers/ContainerWrapper';
-import GenesyssApp from '../../components/GenesyssApp/Geneyss';
-import {ActivityIndicator, StyleSheet, View} from 'react-native';
-import {useFocusEffect} from '@react-navigation/native';
+import { useFocusEffect } from "@react-navigation/native";
+import React, { useCallback, useState } from "react";
+import { ActivityIndicator, StyleSheet, View } from "react-native";
+import { useTailwind } from "tailwind-rn";
+
+import GenesyssApp from "../../components/GenesyssApp/Geneyss";
+import ContainerWrapper from "../../components/wrappers/ContainerWrapper";
+import { COLORS } from "../../constants/colors";
+import { SCREENS } from "../../constants/screens";
+import { RootStackScreenProps } from "../../typings/navigation";
 
 const IndexWelcomeUserAccount = ({
   navigation,
@@ -26,16 +27,18 @@ const IndexWelcomeUserAccount = ({
 
   return (
     <ContainerWrapper
-      style={[tailwind('flex-1'), {backgroundColor: COLORS.BG_COLOR}]}>
-      <View style={[tailwind('flex-1'), StyleSheet.absoluteFillObject]}>
+      style={[tailwind("flex-1"), { backgroundColor: COLORS.BG_COLOR }]}
+    >
+      <View style={[tailwind("flex-1"), StyleSheet.absoluteFillObject]}>
         <GenesyssApp />
         {loading && (
           <View
             style={[
-              tailwind('flex-1'),
+              tailwind("flex-1"),
               StyleSheet.absoluteFillObject,
-              tailwind('justify-center items-center'),
-            ]}>
+              tailwind("justify-center items-center"),
+            ]}
+          >
             <ActivityIndicator size="large" color={COLORS.WHITE} />
           </View>
         )}

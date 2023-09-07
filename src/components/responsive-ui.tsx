@@ -1,7 +1,5 @@
-import React, { useCallback, useEffect } from "react";
 import { LinearGradient } from "expo-linear-gradient";
-import { Style, useTailwind } from "tailwind-rn";
-
+import React from "react";
 import {
   Text,
   TextProps,
@@ -9,12 +7,12 @@ import {
   TouchableOpacity,
   Keyboard,
   ActivityIndicator,
-  View,
 } from "react-native";
+import { Style, useTailwind } from "tailwind-rn";
+
+import ContainerWrapper from "./wrappers/ContainerWrapper";
 import { COLORS } from "../constants/colors";
 import { useAppDimensions } from "../hooks/dimensions";
-import ContainerWrapper from "./wrappers/ContainerWrapper";
-
 
 export interface ResponsiveUiTextProps extends TextProps {
   // TEXT
@@ -52,7 +50,7 @@ export interface ResponsiveUiTextProps extends TextProps {
 
 export interface ResponsiveUiButtonProps extends ResponsiveUiTextProps {
   title: string;
-  style?: {};
+  style?: object;
   titleStyle?: TextStyle;
   backgroundColor?: string;
   disabled?: boolean;
@@ -71,7 +69,7 @@ interface GradientTextProps extends ResponsiveUiTextProps {
 const processTextStyles = (
   props: ResponsiveUiTextProps,
   tailwind: { (_classNames: string): Style },
-  wp: any
+  wp: any,
 ): TextStyle | any => {
   return {
     // DEFAULT COLOR AND FONT

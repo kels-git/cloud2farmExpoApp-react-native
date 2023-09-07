@@ -1,13 +1,14 @@
-import React, {useState} from 'react';
-import {useTailwind} from 'tailwind-rn';
-import {COLORS} from '../constants/colors';
-import {ResponsiveUi} from './responsive-ui';
-import ContainerWrapper from './wrappers/ContainerWrapper';
-import {MetricsSizes} from '../helpers/variables';
-import {TextInput} from 'react-native-paper';
-import {SuccessImg} from '../assets';
-import {TouchableOpacity, Image} from 'react-native';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import React, { useState } from "react";
+import { TouchableOpacity, Image } from "react-native";
+import { TextInput } from "react-native-paper";
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import { useTailwind } from "tailwind-rn";
+
+import { ResponsiveUi } from "./responsive-ui";
+import ContainerWrapper from "./wrappers/ContainerWrapper";
+import { SuccessImg } from "../assets";
+import { COLORS } from "../constants/colors";
+import { MetricsSizes } from "../helpers/variables";
 
 interface InputProps {
   value: string;
@@ -41,25 +42,27 @@ const TextInputComponent: React.FC<InputProps> = ({
   return (
     <ContainerWrapper
       style={[
-        tailwind('flex-row'),
+        tailwind("flex-row"),
         {
           backgroundColor: COLORS.LIGHT_GREY,
           padding: MetricsSizes.small - 2,
           borderRadius: MetricsSizes.regular + 1,
           marginVertical: MetricsSizes.tiny,
         },
-      ]}>
+      ]}
+    >
       <TextInput
         mode="flat"
         value={value}
-        onChangeText={text => setValue(text)}
+        onChangeText={(text) => setValue(text)}
         label={
           <ResponsiveUi.Text
             color={isInputFocused ? COLORS.PRIMARY_START_COLOR : COLORS.GREY}
             style={{
-              fontWeight: '600',
+              fontWeight: "600",
               fontSize: isInputFocused ? 24 : 20,
-            }}>
+            }}
+          >
             {label}
           </ResponsiveUi.Text>
         }
@@ -72,8 +75,8 @@ const TextInputComponent: React.FC<InputProps> = ({
           backgroundColor: COLORS.LIGHT_GREY,
           fontSize: 20,
         }}
-        underlineStyle={{marginLeft: 12}}
-        style={{flex: 1, fontSize: MetricsSizes.regular + 1}}
+        underlineStyle={{ marginLeft: 12 }}
+        style={{ flex: 1, fontSize: MetricsSizes.regular + 1 }}
         onFocus={onFocus}
         onBlur={onBlur}
         onEndEditing={() => onEndEditing}
@@ -81,10 +84,11 @@ const TextInputComponent: React.FC<InputProps> = ({
         {...props}
       />
       {sucessMark && (
-        <Image          source={SuccessImg}
-          resizeMode={'contain'}
+        <Image
+          source={SuccessImg}
+          resizeMode="contain"
           style={[
-            tailwind('mt-2 self-center'),
+            tailwind("mt-2 self-center"),
             {
               width: MetricsSizes.regular,
               height: MetricsSizes.regular,
@@ -96,14 +100,15 @@ const TextInputComponent: React.FC<InputProps> = ({
 
       {imageIconPass && (
         <TouchableOpacity
-          style={[tailwind('mt-2 self-center'), {marginLeft: -15}]}
+          style={[tailwind("mt-2 self-center"), { marginLeft: -15 }]}
           onPress={() => {
             setHidePassword(!hidePassword);
-          }}>
+          }}
+        >
           <MaterialCommunityIcons
             size={20}
             color={COLORS.GREY}
-            name={!hidePassword ? 'eye-off-outline' : 'eye-outline'}
+            name={!hidePassword ? "eye-off-outline" : "eye-outline"}
           />
         </TouchableOpacity>
       )}

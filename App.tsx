@@ -1,11 +1,12 @@
-import React from "react";
-import utilities from "./tailwind.json";
-import { TailwindProvider } from "tailwind-rn";
 import { NavigationContainer } from "@react-navigation/native";
-import { RootNavigation } from "./src/navigation/root-stack";
-import { PaperProvider } from "react-native-paper";
 import * as Font from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
+import React from "react";
+import { PaperProvider } from "react-native-paper";
+import { TailwindProvider } from "tailwind-rn";
+
+import { RootNavigation } from "./src/navigation/root-stack";
+import utilities from "./tailwind.json";
 
 class App extends React.Component {
   constructor(props) {

@@ -1,10 +1,10 @@
-import {ReactNode, ComponentProps} from 'react';
-import {TextInputProps} from 'react-native';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import { ReactNode, ComponentProps } from "react";
+import { TextInputProps } from "react-native";
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 
 interface ExtraInputProps {
   label: ReactNode;
-  icon?: ComponentProps<typeof MaterialCommunityIcons>['name'];
+  icon?: ComponentProps<typeof MaterialCommunityIcons>["name"];
   isPasswordIcon?: boolean;
   isPasswordText?: boolean;
   isValid?: boolean;
