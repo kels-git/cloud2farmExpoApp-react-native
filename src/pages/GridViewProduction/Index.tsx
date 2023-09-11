@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { SafeAreaView, ScrollView, View } from "react-native";
+import { SafeAreaView, ScrollView, View, Text } from "react-native";
 import { DataTable } from "react-native-paper";
 import { useTailwind } from "tailwind-rn";
 
@@ -8,24 +8,24 @@ import { StickyBottomComponent } from "../../components/StickyBottomComponent";
 import ContainerWrapper from "../../components/wrappers/ContainerWrapper";
 import { COLORS } from "../../constants/colors";
 import { SCREENS } from "../../constants/screens";
-import { GridData } from "../../helpers/variables";
+import { GridDataProduction } from "../../helpers/variables";
 import { RootStackScreenProps } from "../../typings/navigation";
 import { ResponsiveUi } from "../../components/responsive-ui";
 
-const IndexGridViewScreen = ({
+const IndexGridViewProductionScreen = ({
   navigation,
   route,
 }: RootStackScreenProps<SCREENS.GRIDVIEW_SCREEN>) => {
   const tailwind = useTailwind();
   const { title }: any = route.params;
   const [page, setPage] = useState<number>(0);
-  const [numberOfItemsPerPageList] = useState([5, 6, 7, 8, 9, 10]);
+  const [numberOfItemsPerPageList] = useState([2, 3, 4, 5, 6, 7]);
   const [itemsPerPage, onItemsPerPageChange] = useState(
     numberOfItemsPerPageList[0]
   );
 
   const from = page * itemsPerPage;
-  const to = Math.min((page + 1) * itemsPerPage, GridData.length);
+  const to = Math.min((page + 1) * itemsPerPage, GridDataProduction.length);
 
   React.useEffect(() => {
     setPage(0);
@@ -45,10 +45,10 @@ const IndexGridViewScreen = ({
           style={[tailwind("flex-1"), { backgroundColor: COLORS.WHITE }]}
         >
           <DataTable>
-            <DataTable.Header>
+            <DataTable.Header style={{}}>
               <DataTable.Title
-                numeric
-                style={[tailwind("justify-center items-center")]}
+                textStyle={{ fontWeight: "bold" }}
+                style={[tailwind("justify-center items-center"), {}]}
               >
                 <View>
                   <ResponsiveUi.Text
@@ -56,7 +56,7 @@ const IndexGridViewScreen = ({
                     style={{ fontWeight: "bold", textAlign: "center" }}
                     color={COLORS.MEDIUM_BLACK}
                   >
-                    15 Mins
+                    Date
                   </ResponsiveUi.Text>
                 </View>
               </DataTable.Title>
@@ -70,7 +70,56 @@ const IndexGridViewScreen = ({
                     style={{ fontWeight: "bold", textAlign: "center" }}
                     color={COLORS.MEDIUM_BLACK}
                   >
-                    Average
+                    Total
+                  </ResponsiveUi.Text>
+                  <ResponsiveUi.Text
+                    h7
+                    style={{ fontWeight: "bold", textAlign: "center" }}
+                    color={COLORS.MEDIUM_BLACK}
+                  >
+                    Cost
+                  </ResponsiveUi.Text>
+                </View>
+              </DataTable.Title>
+              <DataTable.Title
+                numeric
+                style={[tailwind("justify-center items-end")]}
+              >
+                <View>
+                  <ResponsiveUi.Text
+                    h7
+                    style={{ fontWeight: "bold", textAlign: "center" }}
+                    color={COLORS.MEDIUM_BLACK}
+                  >
+                    Gross
+                  </ResponsiveUi.Text>
+                  <ResponsiveUi.Text
+                    h7
+                    style={{ fontWeight: "bold", textAlign: "center" }}
+                    color={COLORS.MEDIUM_BLACK}
+                  >
+                    Income
+                  </ResponsiveUi.Text>
+                </View>
+              </DataTable.Title>
+              <DataTable.Title
+                numeric
+                style={[tailwind("justify-center items-end")]}
+              >
+                <View>
+                  <ResponsiveUi.Text
+                    h7
+                    style={{ fontWeight: "bold", textAlign: "center" }}
+                    color={COLORS.MEDIUM_BLACK}
+                  >
+                    Net
+                  </ResponsiveUi.Text>
+                  <ResponsiveUi.Text
+                    h7
+                    style={{ fontWeight: "bold", textAlign: "center" }}
+                    color={COLORS.MEDIUM_BLACK}
+                  >
+                    Income
                   </ResponsiveUi.Text>
                 </View>
               </DataTable.Title>
@@ -84,70 +133,71 @@ const IndexGridViewScreen = ({
                     style={{ fontWeight: "bold", textAlign: "center" }}
                     color={COLORS.MEDIUM_BLACK}
                   >
-                    Min
+                    Weight
                   </ResponsiveUi.Text>
-                </View>
-              </DataTable.Title>
-
-              <DataTable.Title
-                numeric
-                style={[tailwind("justify-center items-center")]}
-              >
-                <View>
                   <ResponsiveUi.Text
                     h7
                     style={{ fontWeight: "bold", textAlign: "center" }}
                     color={COLORS.MEDIUM_BLACK}
                   >
-                    Max
+                    (kg)
                   </ResponsiveUi.Text>
                 </View>
               </DataTable.Title>
             </DataTable.Header>
 
-            {GridData.slice(from, to).map((item) => (
+            {GridDataProduction.slice(from, to).map((item) => (
               <DataTable.Row key={item.key}>
-                 <DataTable.Cell
-                  numeric
+                <DataTable.Cell
                   textStyle={{ color: COLORS.BLACK }}
-                  style={[tailwind("justify-center items-center"), {}]}
+                  style={{ flex: 1.1 }}
                 >
-                  {item.time}
+                  {item.date}
                 </DataTable.Cell>
                 <DataTable.Cell
                   numeric
                   textStyle={{ color: COLORS.BLACK }}
                   style={[tailwind("justify-center items-center"), {}]}
                 >
-                   {item.average.toString()}
+                  {item.total_cost.toString()}
                 </DataTable.Cell>
                 <DataTable.Cell
                   numeric
                   textStyle={{ color: COLORS.BLACK }}
-                  style={[tailwind("justify-center items-center"), {}]}
+                  style={[tailwind("justify-center items-center")]}
                 >
-                   {item.min.toString()}
+                  {item.gross_income.toString()}
                 </DataTable.Cell>
                 <DataTable.Cell
                   numeric
                   textStyle={{ color: COLORS.BLACK }}
-                  style={[tailwind("justify-center items-center"), {}]}
+                  style={[tailwind("justify-center items-center")]}
                 >
-                   {item.max.toString()}
+                  {item.net_income.toString()}
+                </DataTable.Cell>
+                <DataTable.Cell
+                  numeric
+                  textStyle={{ color: COLORS.BLACK }}
+                  style={[tailwind("justify-center items-center")]}
+                >
+                  {item.weight.toString()}
                 </DataTable.Cell>
               </DataTable.Row>
             ))}
 
             <DataTable.Pagination
               page={page}
-              numberOfPages={Math.ceil(GridData.length / itemsPerPage)}
+              numberOfPages={Math.ceil(
+                GridDataProduction.length / itemsPerPage
+              )}
               onPageChange={(page) => setPage(page)}
-              label={`${from + 1}-${to} of ${GridData.length}`}
+              label={`${from + 1}-${to} of ${GridDataProduction.length}`}
               numberOfItemsPerPageList={numberOfItemsPerPageList}
               numberOfItemsPerPage={itemsPerPage}
               onItemsPerPageChange={onItemsPerPageChange}
               showFastPaginationControls
               selectPageDropdownLabel="Rows per page"
+              
             />
           </DataTable>
         </ContainerWrapper>
@@ -157,4 +207,4 @@ const IndexGridViewScreen = ({
   );
 };
 
-export default IndexGridViewScreen;
+export default IndexGridViewProductionScreen;

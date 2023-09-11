@@ -2,9 +2,9 @@ import { Buffer as NodeBuffer } from "buffer";
 import ExcelJS from "exceljs";
 import * as FileSystem from "expo-file-system";
 import * as Sharing from "expo-sharing";
-import React from "react";
+import React, { useEffect, useLayoutEffect, useState } from "react";
 import { SafeAreaView, ScrollView, View } from "react-native";
-import { BarChart } from "react-native-gifted-charts";
+import { BarChart, LineChart } from "react-native-gifted-charts";
 import { useTailwind } from "tailwind-rn";
 
 import HeaderComponent from "../../components/HeaderComponent";
@@ -14,6 +14,8 @@ import ContainerWrapper from "../../components/wrappers/ContainerWrapper";
 import { COLORS } from "../../constants/colors";
 import { SCREENS } from "../../constants/screens";
 import { RootStackScreenProps } from "../../typings/navigation";
+import { CheckBox } from "react-native-elements";
+import { MetricsSizes } from "../../helpers/variables";
 
 const IndexChartViewScreen = ({
   navigation,
@@ -21,8 +23,12 @@ const IndexChartViewScreen = ({
 }: RootStackScreenProps<SCREENS.CHARTVIEW_SCREEN>) => {
   const tailwind = useTailwind();
   const { title }: any = route.params;
+  const [showBarView, setShowBarView] = useState(false);
+  const [showLineView, setShowLineView] = useState(false);
+
+
   const barData = [
-    { id: 1, value: 250, label: "Mon" },
+    { id: 1, value: 150, label: "Mon" },
     { id: 2, value: 500, label: "Tue", frontColor: COLORS.PRIMARY_END_COLORS },
     { id: 3, value: 745, label: "Wed" },
     { id: 4, value: 320, label: "Thu", frontColor: COLORS.PRIMARY_END_COLORS },
@@ -38,6 +44,9 @@ const IndexChartViewScreen = ({
     { id: 14, value: 900, label: "Sun" },
     { id: 15, value: 432, label: "Mon" },
   ];
+
+
+
 
   function handleSignOut() {}
 
@@ -126,6 +135,20 @@ const IndexChartViewScreen = ({
     });
   };
 
+  function handleLineView(): void {
+    if (!showLineView) {
+      setShowBarView(false);
+    }
+    setShowLineView(!showLineView);
+  }
+
+  function handleBarView(): void {
+    if (!showBarView) {
+      setShowLineView(false);
+    }
+    setShowBarView(!showBarView);
+  }
+
   return (
     <SafeAreaView
       style={[tailwind("flex-1"), { backgroundColor: COLORS.LIGHT_GREY }]}
@@ -136,23 +159,91 @@ const IndexChartViewScreen = ({
       >
         <HeaderComponent title={title} />
 
-        <ContainerWrapper style={[tailwind("flex-1")]}>
+        <ContainerWrapper style={[tailwind("pl-3 pr-3 pt-10 pb-2")]}>
+          <ContainerWrapper
+            style={[tailwind("flex-row justify-center items-center")]}
+          >
+            <ContainerWrapper style={[tailwind("flex-row")]}>
+              <CheckBox
+                title="Line Chart"
+                checked={showLineView}
+                onPress={handleLineView}
+                containerStyle={{
+                  backgroundColor: COLORS.LIGHT_GREY,
+                  borderWidth: MetricsSizes.zero,
+                }}
+                textStyle={[
+                  {
+                    fontSize: 16,
+                    fontWeight: "400",
+                    color: COLORS.BLACK,
+                  },
+                ]}
+              />
+            </ContainerWrapper>
+            <ContainerWrapper style={[tailwind("flex-row")]}>
+              <CheckBox
+                title="Bar Chart"
+                checked={showBarView}
+                onPress={handleBarView}
+                containerStyle={{
+                  backgroundColor: COLORS.LIGHT_GREY,
+                  borderWidth: MetricsSizes.zero,
+                }}
+                textStyle={[
+                  {
+                    fontSize: 16,
+                    fontWeight: "400",
+                    color: COLORS.BLACK,
+                  },
+                ]}
+              />
+            </ContainerWrapper>
+          </ContainerWrapper>
           <View
             style={[
-              tailwind("mt-20 mb-10 ml-2 mr-2"),
-              { backgroundColor: COLORS.CHART_BG },
+              tailwind("mb-3 mt-2"),
+              { borderColor: COLORS.BG_SECONDARY_COLOR, borderWidth: 1 },
             ]}
-          >
-            <BarChart
-              barWidth={22}
-              noOfSections={3}
-              barBorderRadius={4}
-              frontColor="lightgray"
-              data={barData}
-              yAxisThickness={0}
-              xAxisThickness={0}
-            />
-          </View>
+          />
+        </ContainerWrapper>
+
+        <ContainerWrapper style={[tailwind("flex-1")]}>
+          {showBarView ? (
+            <View
+              style={[
+                tailwind("mt-10 mb-10 ml-2 mr-2"),
+                { backgroundColor: COLORS.CHART_BG },
+              ]}
+            >
+              <BarChart
+                barWidth={22}
+                noOfSections={6}
+                barBorderRadius={4}
+                frontColor="lightgray"
+                data={barData}
+                yAxisThickness={0}
+                xAxisThickness={0}
+              />
+            </View>
+          ) : (
+            <View
+              style={[
+                tailwind("mt-10 mb-10 ml-2 mr-2"),
+                { backgroundColor: COLORS.CHART_BG },
+              ]}
+            >
+              <LineChart
+                areaChart
+                data={barData}
+                noOfSections={6}
+                startFillColor="rgb(46, 217, 255)"
+                startOpacity={0.8}
+                endFillColor="rgb(203, 241, 250)"
+                endOpacity={0.3}
+              />
+            </View>
+          )}
 
           <ContainerWrapper
             style={[tailwind("justify-center items-center top-10 mb-20")]}

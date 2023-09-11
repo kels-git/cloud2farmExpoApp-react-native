@@ -15,6 +15,7 @@ export type HomeStackParamList = {
   [SCREENS.TRENDING_SCREEN]: undefined;
   [SCREENS.CHARTVIEW_SCREEN]: undefined;
   [SCREENS.GRIDVIEW_SCREEN]: undefined;
+  [SCREENS.GRIDVIEW_PRODUCTION_SCREEN]: undefined;
   [SCREENS.TEST_SCREEN]: undefined;
 };
 

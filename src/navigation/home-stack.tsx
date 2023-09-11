@@ -5,6 +5,7 @@ import { SCREENS } from "../constants/screens";
 import {
   IndexChartViewScreen,
   IndexDashBoardScreen,
+  IndexGridViewProductionScreen,
   IndexGridViewScreen,
   IndexProductionScreen,
   IndexTestScreen,
@@ -52,6 +53,11 @@ const HomeStackNavigator = () => {
       <HomeStack.Screen
         name={SCREENS.GRIDVIEW_SCREEN}
         component={IndexGridViewScreen}
+      />
+
+      <HomeStack.Screen
+        name={SCREENS.GRIDVIEW_PRODUCTION_SCREEN}
+        component={IndexGridViewProductionScreen}
       />
       <HomeStack.Screen
         name={SCREENS.TEST_SCREEN}

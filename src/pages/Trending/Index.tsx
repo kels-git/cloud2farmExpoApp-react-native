@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import { SafeAreaView, ScrollView, View } from "react-native";
 import { CheckBox } from "react-native-elements";
 import { useTailwind } from "tailwind-rn";
-
 import HeaderComponent from "../../components/HeaderComponent";
 import { ModalCalendarComponent } from "../../components/ModalCalendarComponent";
 import { ModalCategoryComponent } from "../../components/ModalCategoryComponent";
@@ -20,6 +19,7 @@ import {
   TimeLine,
 } from "../../helpers/variables";
 import { RootStackScreenProps } from "../../typings/navigation";
+import { dropShadow } from "../../components/wrappers/drop-shadow";
 
 const IndexTrendingScreen = ({
   navigation,
@@ -100,16 +100,19 @@ const IndexTrendingScreen = ({
   function handleGridView() {
     if (!checkGridView) {
       setCheckedGridViewData("GridView");
+      setCheckedChartViewData(""); // Uncheck ChartView
+      setCheckChartView(false);
     } else {
       setCheckedGridViewData("");
     }
     setCheckGridView(!checkGridView);
   }
 
-
   function handleChartView() {
     if (!checkChartView) {
       setCheckedChartViewData("ChartView");
+      setCheckedGridViewData(""); // Uncheck GridView
+      setCheckGridView(false);
     } else {
       setCheckedChartViewData("");
     }
@@ -170,8 +173,9 @@ const IndexTrendingScreen = ({
 
         <ContainerWrapper
           style={[
-            tailwind("ml-3 mr-3 mt-10 p-2 rounded-lg"),
+            tailwind("ml-3 mr-3 mt-10 mb-5 p-2 rounded-lg"),
             { backgroundColor: COLORS.WHITE },
+            dropShadow["1x"],
           ]}
         >
           <TextViewComponent

@@ -52,14 +52,20 @@ export const FontWeight = {
   normal,
 };
 
-export const PondsData = ["Pond 1", "Pond 2", "Pond 3", "Pond 4", "Pond 5"];
-export const TemperatureType = ["EC", "PH", "Disolved Oxygen", "Backwash", "Feed Pump"];
-export const TimeLine = [
-  "15 Minutes",
-  "Hourly",
-  "Daily",
-  "Monthly",
+export const PondsData = [
+  "Talapia Test Pond",
+  "Talapia Test Pond Backup",
+  "Pond 1",
 ];
+export const TemperatureType = [
+  "Temperature",
+  "EC",
+  "PH",
+  "Disolved Oxygen",
+  "Backwash",
+  "Feed Pump",
+];
+export const TimeLine = ["15 Minutes", "Hourly", "Daily", "Monthly"];
 export const PondSite = [
   "Site - 1",
   "Site - 2",
@@ -226,6 +232,57 @@ export const DashBoardOverviewTest: PondsDataType[] = [
         LastRunTime: "02/08/2023 - 10:00:00",
       },
     ],
+  },
+];
+
+export const GridDataProduction = [
+  {
+    key: 1,
+    date: "02/4/2020",
+    total_cost: "2000",
+    gross_income: "1000",
+    net_income: "1000",
+    weight: "50",
+  },
+  {
+    key: 2,
+    date: "24/4/2020",
+    total_cost: "5000",
+    gross_income: "3000",
+    net_income: "2000",
+    weight: "30",
+  },
+  {
+    key: 3,
+    date: "01/5/2022",
+    total_cost: "10000",
+    gross_income: "5000",
+    net_income: "5000",
+    weight: "54",
+  },
+  {
+    key: 4,
+    date: "10/5/2022",
+    total_cost: "12000",
+    gross_income: "8000",
+    net_income: "4000",
+    weight: "76",
+  },
+  {
+    key: 5,
+    date: "18/5/2022",
+    total_cost: "12000",
+    gross_income: "9000",
+    net_income: "3000",
+    weight: "28",
+  },
+  {
+    key: 6,
+    date: "26/6/2023",
+    total_cost: "110000",
+    gross_income: "100000",
+    net_income: "10000",
+    weight: "45",
   },
 ];
 

@@ -9,5 +9,6 @@ export enum SCREENS {
   TRENDING_SCREEN = "Trending",
   CHARTVIEW_SCREEN = "ChartView",
   GRIDVIEW_SCREEN = "GridView",
+  GRIDVIEW_PRODUCTION_SCREEN = "GridView Production",
   TEST_SCREEN = "Test Screen",
 }
