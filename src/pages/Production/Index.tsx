@@ -12,13 +12,9 @@ import { ResponsiveUi } from "../../components/responsive-ui";
 import ContainerWrapper from "../../components/wrappers/ContainerWrapper";
 import { COLORS } from "../../constants/colors";
 import { SCREENS } from "../../constants/screens";
-import {
-  MetricsSizes,
-  PondSite,
-  TemperatureType,
-  TimeLine,
-} from "../../helpers/variables";
+import { PondSite, PondsData } from "../../helpers/variables";
 import { RootStackScreenProps } from "../../typings/navigation";
+import { dropShadow } from "../../components/wrappers/drop-shadow";
 
 const IndexProductionScreen = ({
   navigation,
@@ -27,99 +23,42 @@ const IndexProductionScreen = ({
   const tailwind = useTailwind();
   const { title }: any = route.params;
   const [pondSite, setPondSite] = useState(PondSite[0]);
-  const [tempType, setTempType] = useState("Temperature");
-  const [timelineValue, setTimelineValue] = useState("15 Minutes");
-  const [selectedDate, setSelectedDate] = useState("Feb 25, 2018");
+  const [pondName, setPondName] = useState(PondsData[0]);
   const [isPondPropsVisible, setIsPondProsVisible] = useState(false);
-  const [isTempTypeVisible, setIsTempTypeVisible] = useState(false);
-  const [isTimelineVisible, setIsTimelineVisible] = useState(false);
-  const [isSelectedDateisible, setIsSelectedDateVisible] = useState(false);
-  const [checkGridView, setCheckGridView] = useState(false);
-  const [checkChartView, setCheckChartView] = useState(false);
-  const [checkedGridViewData, setCheckedGridViewData] = useState("");
-  const [checkedChartViewData, setCheckedChartViewData] = useState("");
+  const [isPondNameVisible, setIsPondNameVisible] = useState(false);
 
-  function changeModalPondVisibility(bool: boolean): void {
+  function changeModalPondSiteVisibility(bool: boolean): void {
     setIsPondProsVisible(bool);
   }
 
-  function changeModalTempTypeVisibility(bool: boolean): void {
-    setIsTempTypeVisible(bool);
+  function changeModalPondNameVisibility(bool: boolean): void {
+    setIsPondNameVisible(bool);
   }
 
-  function changeModalTimelineVisibility(bool: boolean): void {
-    setIsTimelineVisible(bool);
+  function handlePondSite() {
+    changeModalPondSiteVisibility(true);
   }
 
-  function changeModalDateVisibility(bool: boolean) {
-    setIsSelectedDateVisible(bool);
-  }
-  function handlePondProperties() {
-    changeModalPondVisibility(true);
+  function handlePondName() {
+    changeModalPondNameVisibility(true);
   }
 
-  function handleTempratureType() {
-    changeModalTempTypeVisibility(true);
-  }
-
-  function handleSelectedDate() {
-    changeModalDateVisibility(true);
-  }
-
-  function handleTimeline() {
-    changeModalTimelineVisibility(true);
-  }
-
-  function setDataPond(item: string): void {
+  function setDataPondSite(item: string): void {
     if (item !== "") {
       setPondSite(item);
-      changeModalPondVisibility(false);
+      changeModalPondSiteVisibility(false);
     }
   }
 
-  function setDataTemp(item: string): void {
+  function setDataPondName(item: string): void {
     if (item !== "") {
-      setTempType(item);
-      changeModalTempTypeVisibility(false);
+      setPondName(item);
+      changeModalPondNameVisibility(false);
     }
-  }
-
-  function setDataTimeline(item: string): void {
-    if (item !== "") {
-      setTimelineValue(item);
-      changeModalTimelineVisibility(false);
-    }
-  }
-
-  function setSelectedDateData(item: string): void {
-    const pickedDate = moment(item).format("ll");
-    setSelectedDate(pickedDate);
-  }
-
-  function handleGridView() {
-    if (!checkGridView) {
-      setCheckedGridViewData("GridView");
-    } else {
-      setCheckedGridViewData("");
-    }
-    setCheckGridView(!checkGridView);
-  }
-
-  function handleChartView() {
-    if (!checkChartView) {
-      setCheckedChartViewData("ChartView");
-    } else {
-      setCheckedChartViewData("");
-    }
-    setCheckChartView(!checkChartView);
   }
 
   function handleLoadReport() {
-    if (checkedChartViewData.includes("ChartView")) {
-      navigation.navigate(SCREENS.CHARTVIEW_SCREEN, { title: pondSite });
-    } else if (checkedGridViewData.includes("GridView")) {
-      navigation.navigate(SCREENS.GRIDVIEW_SCREEN, { title: pondSite });
-    }
+    navigation.navigate(SCREENS.GRIDVIEW_PRODUCTION_SCREEN, { title: title });
   }
 
   return (
@@ -131,110 +70,44 @@ const IndexProductionScreen = ({
         showsVerticalScrollIndicator={false}
       >
         <HeaderComponent title={title} />
-        <ModalCalendarComponent
-          visible={isSelectedDateisible}
-          setData={setSelectedDateData}
-          modalTitle="Please Select Date"
-          setVisibility={() => changeModalDateVisibility(false)}
-          changeModaVisibility={changeModalDateVisibility}
-        />
 
         <ModalCategoryComponent
           categories={PondSite}
           visible={isPondPropsVisible}
           modalTitle="Select Pond"
-          setData={setDataPond}
-          setVisibility={() => changeModalPondVisibility(false)}
-          changeModaVisibility={changeModalPondVisibility}
+          setData={setDataPondSite}
+          setVisibility={() => changeModalPondSiteVisibility(false)}
+          changeModaVisibility={changeModalPondSiteVisibility}
         />
 
         <ModalCategoryComponent
-          categories={TemperatureType}
-          visible={isTempTypeVisible}
-          modalTitle="Select Temp Type"
-          setData={setDataTemp}
-          setVisibility={() => changeModalTempTypeVisibility(false)}
-          changeModaVisibility={changeModalTempTypeVisibility}
+          categories={PondsData}
+          visible={isPondNameVisible}
+          modalTitle="Pond Name"
+          setData={setDataPondName}
+          setVisibility={() => changeModalPondNameVisibility(false)}
+          changeModaVisibility={changeModalPondNameVisibility}
         />
-
-        {/* <ModalCategoryComponent
-          categories={TimeLine}
-          visible={isTimelineVisible}
-          modalTitle="Select Timeline"
-          setData={setDataTimeline}
-          setVisibility={() => changeModalTimelineVisibility(false)}
-          changeModaVisibility={changeModalTimelineVisibility}
-        /> */}
 
         <ContainerWrapper
           style={[
-            tailwind("ml-3 mr-3 mt-10 p-2 rounded-lg"),
+            tailwind("ml-3 mr-3 mt-10 mb-10 p-2 rounded-lg"),
             { backgroundColor: COLORS.WHITE },
+            dropShadow["1x"],
           ]}
         >
           <TextViewComponent
             value={pondSite}
             title="Select Your Site"
-            action={() => handlePondProperties()}
+            action={() => handlePondSite()}
           />
 
           <TextViewComponent
-            value={tempType}
-            title="Select Temprature Type"
-            action={() => handleTempratureType()}
+            value={pondName}
+            title="Pond Name"
+            action={() => handlePondName()}
           />
 
-        
-
-          <ContainerWrapper style={[tailwind("pl-3 pr-3 pt-1 pb-2")]}>
-            <ResponsiveUi.Text h7 color={COLORS.GREY}>
-              Report Type
-            </ResponsiveUi.Text>
-            <ContainerWrapper style={[tailwind("flex-row")]}>
-              <ContainerWrapper style={[tailwind("flex-row")]}>
-                <CheckBox
-                  title="Grid View"
-                  checked={checkGridView}
-                  onPress={handleGridView}
-                  containerStyle={{
-                    backgroundColor: COLORS.WHITE,
-                    borderWidth: MetricsSizes.zero,
-                  }}
-                  textStyle={[
-                    {
-                      fontSize: 16,
-                      fontWeight: "400",
-                      color: COLORS.BLACK,
-                    },
-                  ]}
-                />
-              </ContainerWrapper>
-              <ContainerWrapper style={[tailwind("flex-row")]}>
-                <CheckBox
-                  title="Chart View"
-                  checked={checkChartView}
-                  onPress={handleChartView}
-                  containerStyle={{
-                    backgroundColor: COLORS.WHITE,
-                    borderWidth: MetricsSizes.zero,
-                  }}
-                  textStyle={[
-                    {
-                      fontSize: 16,
-                      fontWeight: "400",
-                      color: COLORS.BLACK,
-                    },
-                  ]}
-                />
-              </ContainerWrapper>
-            </ContainerWrapper>
-            <View
-              style={[
-                tailwind("mb-3 mt-2"),
-                { borderColor: COLORS.BG_SECONDARY_COLOR, borderWidth: 1 },
-              ]}
-            />
-          </ContainerWrapper>
           <ContainerWrapper style={[tailwind("justify-center items-center")]}>
             <ResponsiveUi.Button
               bold
