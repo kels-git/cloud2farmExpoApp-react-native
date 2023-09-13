@@ -4,10 +4,10 @@ export enum COLORS {
   HIGH_GRAD_BLACK = "#070821",
   GREEN_BG = "#01B41F",
   GREY = "#BBC3CE",
-  "LIGHT_GREEN" = "#E9FCE3",
-  "LIGHT_BLUE" = "#E7FCFF",
-  "LIGHT_GRAY" = "#E2E9FB",
-  "LIGHT_PINK" = "#EBE3FC",
+  LIGHT_GREEN = "#E9FCE3",
+  LIGHT_BLUE = "#E7FCFF",
+  LIGHT_GRAY = "#E2E9FB",
+  LIGHT_PINK = "#EBE3FC",
   "TICK_TINT" = "#9D9CBA",
 
   //Colors for development

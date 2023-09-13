@@ -14,11 +14,13 @@ import {
 } from "../pages";
 import { HomeStackParamList } from "../typings/navigation";
 
+
 // Import your screen components here
 
 const HomeStack = createNativeStackNavigator<HomeStackParamList>();
 
 const HomeStackNavigator = () => {
+
   return (
     <HomeStack.Navigator
       initialRouteName={SCREENS.HOME_SCREEN} // Set the initial screen for the stack

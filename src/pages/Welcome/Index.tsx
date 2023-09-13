@@ -1,5 +1,5 @@
 import { useFocusEffect } from "@react-navigation/native";
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { ActivityIndicator, StyleSheet, View } from "react-native";
 import { useTailwind } from "tailwind-rn";
 
@@ -9,11 +9,13 @@ import { COLORS } from "../../constants/colors";
 import { SCREENS } from "../../constants/screens";
 import { RootStackScreenProps } from "../../typings/navigation";
 
+
 const IndexWelcomeUserAccount = ({
   navigation,
 }: RootStackScreenProps<SCREENS.WELCOME_SCREEN>) => {
   const tailwind = useTailwind();
   const [loading, setLoading] = useState(true);
+
 
   useFocusEffect(
     useCallback(() => {
@@ -22,7 +24,7 @@ const IndexWelcomeUserAccount = ({
         setLoading(false);
         navigation.navigate(SCREENS.LOGIN_USER);
       }, 2000);
-    }, []),
+    }, [])
   );
 
   return (

@@ -4,6 +4,8 @@ import {
   ScrollView,
   TouchableOpacity,
   Image,
+  StatusBar,
+  StatusBarStyle,
 } from "react-native";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import { useTailwind } from "tailwind-rn";
@@ -24,6 +26,7 @@ import {
   PondsData,
 } from "../../helpers/variables";
 import { RootStackScreenProps } from "../../typings/navigation";
+import StatusBarWrapper from "../../components/StatusBarWrapper";
 
 interface pondDataType {
   name: string;
@@ -50,6 +53,7 @@ const IndexDashBoardScreen = ({
   const { title }: any = route.params;
   const tailwind = useTailwind();
   const [selectedPondData, setSelectedPondData] = useState("");
+ 
   const [tempWaterData, setTempWaterData] = useState<
     { watertemp: string; reservoirwaterlevel: string }[]
   >([]);
@@ -62,6 +66,7 @@ const IndexDashBoardScreen = ({
   >([]);
   const [isPondVisible, setIsPondVisible] = useState(false);
   const pondDataView: pondDataType[] = DashBoardOverviewTest;
+ 
 
   function handlePondDataSelected(item: string): void {
     if (item !== "") {
@@ -101,6 +106,7 @@ const IndexDashBoardScreen = ({
         contentContainerStyle={[tailwind("flex-grow"), {}]}
         showsVerticalScrollIndicator={false}
       >
+        <StatusBarWrapper />
         <HeaderComponent title={title} />
         <ModalCategoryComponent
           categories={PondsData}
@@ -116,40 +122,43 @@ const IndexDashBoardScreen = ({
             bold
             h6
             color={COLORS.GREY}
-            style={[tailwind("mb-2 w-full"), {marginLeft: MetricsSizes.tiny + 1}]}
+            style={[
+              tailwind("mb-2 w-full"),
+              { marginLeft: MetricsSizes.tiny + 1 },
+            ]}
           >
             Select Your Ponds/Properties
           </ResponsiveUi.Text>
-          <ContainerWrapper style={[tailwind('mb-5 absolute mt-5 w-full'),{}]}>
-          <TouchableOpacity
-            style={[
-              tailwind("flex-row rounded justify-between"),
-              { padding:MetricsSizes.tiny - 1 },
-            ]}
-            onPress={() => {
-              changeModaVisibility(true);
-            }}
-          >
-            <ResponsiveUi.Text
-              h5
-              color={
-                selectedPondData.includes("Select")
-                  ? COLORS.TEXT_GREY
-                  : COLORS.BLACK
-              }
-              tailwind="font-regular"
+          <ContainerWrapper style={[tailwind("mb-5 absolute mt-5 w-full"), {}]}>
+            <TouchableOpacity
+              style={[
+                tailwind("flex-row rounded justify-between"),
+                { padding: MetricsSizes.tiny - 1 },
+              ]}
+              onPress={() => {
+                changeModaVisibility(true);
+              }}
             >
-              Select
-            </ResponsiveUi.Text>
-            <MaterialCommunityIcons
-              size={25}
-              color={COLORS.TEXT_GREY}
-              name="chevron-right"
-              style={[tailwind("self-center")]}
-            />
-          </TouchableOpacity>
+              <ResponsiveUi.Text
+                h5
+                color={
+                  selectedPondData.includes("Select")
+                    ? COLORS.TEXT_GREY
+                    : COLORS.BLACK
+                }
+                tailwind="font-regular"
+              >
+                Select
+              </ResponsiveUi.Text>
+              <MaterialCommunityIcons
+                size={25}
+                color={COLORS.TEXT_GREY}
+                name="chevron-right"
+                style={[tailwind("self-center")]}
+              />
+            </TouchableOpacity>
           </ContainerWrapper>
-       
+
           <ContainerWrapper
             style={[tailwind("items-center justify-center mt-10")]}
           >
@@ -181,47 +190,45 @@ const IndexDashBoardScreen = ({
             />
           </ContainerWrapper>
         ) : (
-         
+          <ContainerWrapper
+            style={[
+              tailwind("flex-1 justify-center items-center mt-5 h-full mb-5"),
+              {},
+            ]}
+          >
             <ContainerWrapper
               style={[
-                tailwind("flex-1 justify-center items-center mt-5 h-full mb-5"),
-                {},
+                tailwind("w-full justify-around"),
+                {
+                  backgroundColor: COLORS.BG_COLOR,
+                  borderTopLeftRadius: MetricsSizes.medium + 1,
+                  borderTopRightRadius: MetricsSizes.medium + 1,
+                  paddingHorizontal: MetricsSizes.small,
+                },
               ]}
             >
-              <ContainerWrapper
-                style={[
-                  tailwind("w-full justify-around"),
-                  {
-                    backgroundColor: COLORS.BG_COLOR,
-                    borderTopLeftRadius: MetricsSizes.medium + 1,
-                    borderTopRightRadius: MetricsSizes.medium + 1,
-                    paddingHorizontal: MetricsSizes.small,
-                  },
-                ]}
-              >
-                {selectedPondDataDetails.map((item: any, index: any) => (
-                  <>
-                    <CardGridComponent
-                      isDashBoard
-                      key={index}
-                      gridTitle={item.title}
-                      gridStatus={item.status}
-                      gridVolume={item.volume}
-                      gridTime={item.LastRunTime}
-                      gridIconDisplay={PondHeader.filter((icons) => icons.type)}
-                      gridTemperature={tempWaterData.filter(
-                        (tempItem) => tempItem.watertemp
-                      )}
-                      gridWaterReservoir={tempWaterData.filter(
-                        (tempItem) => tempItem.reservoirwaterlevel
-                      )} //
-                      isLastItem={index === selectedPondDataDetails.length - 1}
-                    />
-                  </>
-                ))}
-              </ContainerWrapper>
+              {selectedPondDataDetails.map((item: any, index: any) => (
+                <>
+                  <CardGridComponent
+                    isDashBoard
+                    key={index}
+                    gridTitle={item.title}
+                    gridStatus={item.status}
+                    gridVolume={item.volume}
+                    gridTime={item.LastRunTime}
+                    gridIconDisplay={PondHeader.filter((icons) => icons.type)}
+                    gridTemperature={tempWaterData.filter(
+                      (tempItem) => tempItem.watertemp
+                    )}
+                    gridWaterReservoir={tempWaterData.filter(
+                      (tempItem) => tempItem.reservoirwaterlevel
+                    )} //
+                    isLastItem={index === selectedPondDataDetails.length - 1}
+                  />
+                </>
+              ))}
             </ContainerWrapper>
-         
+          </ContainerWrapper>
         )}
       </ScrollView>
       <StickyBottomComponent />

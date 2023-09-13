@@ -8,6 +8,8 @@ import { StackParams } from "../typings/navigation";
 const Stack = createNativeStackNavigator<StackParams>();
 
 export const RootNavigation = () => {
+  console.log("Test==> ");
+
   return (
     <>
       <Stack.Navigator

@@ -17,7 +17,7 @@ const HeaderComponent: React.FC<HeaderProps> = ({ title }) => {
   const navigation = useNavigation();
   return (
     <>
-      <ContainerWrapper style={[tailwind("pt-2 pb-2 mt-10")]}>
+      <ContainerWrapper style={[tailwind("pt-2 pb-2")]}>
         <TouchableOpacity
           onPress={() => {
             navigation.goBack();

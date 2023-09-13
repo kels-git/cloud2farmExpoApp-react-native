@@ -2,25 +2,20 @@ import React from "react";
 import { TouchableOpacity, useWindowDimensions } from "react-native";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import { useTailwind } from "tailwind-rn";
-
 import { ResponsiveUi } from "./responsive-ui";
 import ContainerWrapper from "./wrappers/ContainerWrapper";
 import { COLORS } from "../constants/colors";
 import { MetricsSizes } from "../helpers/variables";
 import { useOrientation } from "../pages/useOrientation";
 
-interface StickyBottomProps {
-  actionSearch?: () => void;
-  actionSignOut?: () => void;
-}
-
-export const StickyBottomComponent: React.FC<StickyBottomProps> = ({
-  actionSearch,
-  actionSignOut,
-}) => {
+export function StickyBottomComponent({}) {
   const tailwind = useTailwind();
   const orientation = useOrientation();
   const SCREEN_HEIGHT = useWindowDimensions().height;
+  // const isAuthenticated = useSelector((state: RootState) => state.auth.isAuthenticated);
+  // const user = useSelector((state: RootState) => state.auth.user);
+
+  function handleLogout() {}
 
   return (
     <ContainerWrapper
@@ -37,41 +32,21 @@ export const StickyBottomComponent: React.FC<StickyBottomProps> = ({
         },
       ]}
     >
-      <ContainerWrapper style={[tailwind("items-center")]}>
+      <ContainerWrapper style={[tailwind("w-11/12 mt-4 mb-4 items-end")]}>
         <TouchableOpacity
-          onPress={() => {
-            actionSearch;
-          }}
+          style={[tailwind("items-center justify-center")]}
+          onPress={handleLogout}
         >
           <MaterialCommunityIcons
-            size={orientation === "LANDSCAPE" ? 40 : 25}
-            color={COLORS.PRIMARY_ALTERNATIVE}
-            name="magnify"
-            style={[tailwind("")]}
-          />
-        </TouchableOpacity>
-        <ResponsiveUi.Text h7 bold color={COLORS.BLACK}>
-          Search
-        </ResponsiveUi.Text>
-      </ContainerWrapper>
-
-      <ContainerWrapper style={[tailwind("items-center")]}>
-        <TouchableOpacity
-          onPress={() => {
-            actionSignOut;
-          }}
-        >
-          <MaterialCommunityIcons
-            size={orientation === "LANDSCAPE" ? 40 : 25}
+            size={30}
             color={COLORS.ORANGE}
             name="account-outline"
-            style={[tailwind("")]}
           />
+          <ResponsiveUi.Text h7 bold color={COLORS.PRIMARY}>
+            Log Out
+          </ResponsiveUi.Text>
         </TouchableOpacity>
-        <ResponsiveUi.Text h7 bold color={COLORS.BLACK}>
-          Log Out
-        </ResponsiveUi.Text>
       </ContainerWrapper>
     </ContainerWrapper>
   );
-};
+}

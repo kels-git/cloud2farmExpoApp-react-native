@@ -15,6 +15,7 @@ import { SCREENS } from "../../constants/screens";
 import { PondSite, PondsData } from "../../helpers/variables";
 import { RootStackScreenProps } from "../../typings/navigation";
 import { dropShadow } from "../../components/wrappers/drop-shadow";
+import StatusBarWrapper from "../../components/StatusBarWrapper";
 
 const IndexProductionScreen = ({
   navigation,
@@ -65,6 +66,7 @@ const IndexProductionScreen = ({
     <SafeAreaView
       style={[tailwind("flex-1"), { backgroundColor: COLORS.LIGHT_GREY }]}
     >
+       <StatusBarWrapper />
       <ScrollView
         contentContainerStyle={{}}
         showsVerticalScrollIndicator={false}

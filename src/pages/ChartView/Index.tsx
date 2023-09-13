@@ -35,14 +35,7 @@ const IndexChartViewScreen = ({
     { id: 5, value: 600, label: "Fri" },
     { id: 6, value: 256, label: "Sat", frontColor: COLORS.PRIMARY_END_COLORS },
     { id: 7, value: 300, label: "Sun" },
-    { id: 8, value: 400, label: "Mon", frontColor: COLORS.PRIMARY_END_COLORS },
-    { id: 9, value: 400, label: "Tue" },
-    { id: 10, value: 256, label: "Wed", frontColor: COLORS.PRIMARY_END_COLORS },
-    { id: 11, value: 300, label: "Thu" },
-    { id: 12, value: 650, label: "Fri", frontColor: COLORS.PRIMARY_END_COLORS },
-    { id: 13, value: 650, label: "Sat" },
-    { id: 14, value: 900, label: "Sun" },
-    { id: 15, value: 432, label: "Mon" },
+  
   ];
 
 
@@ -212,18 +205,19 @@ const IndexChartViewScreen = ({
           {showBarView ? (
             <View
               style={[
-                tailwind("mt-10 mb-10 ml-2 mr-2"),
+                tailwind("mt-10 mb-10 p-4"),
                 { backgroundColor: COLORS.CHART_BG },
               ]}
             >
               <BarChart
                 barWidth={22}
                 noOfSections={6}
-                barBorderRadius={4}
+                barBorderRadius={3}
                 frontColor="lightgray"
                 data={barData}
-                yAxisThickness={0}
-                xAxisThickness={0}
+                yAxisThickness={1}
+                xAxisThickness={1}
+                spacing={17}
               />
             </View>
           ) : (
@@ -241,6 +235,7 @@ const IndexChartViewScreen = ({
                 startOpacity={0.8}
                 endFillColor="rgb(203, 241, 250)"
                 endOpacity={0.3}
+                spacing={45}
               />
             </View>
           )}
@@ -262,8 +257,7 @@ const IndexChartViewScreen = ({
       </ScrollView>
 
       <StickyBottomComponent
-        actionSearch={handleSearch}
-        actionSignOut={handleSignOut}
+       
       />
     </SafeAreaView>
   );
