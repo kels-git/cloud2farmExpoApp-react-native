@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   ImageBackground,
   SafeAreaView,
@@ -29,6 +29,7 @@ const IndexLoginUserEmail = ({
   const [isUsernameFocused, setIsUsernameFocused] = useState(false);
   const [isPasswordFocused, setIsPasswordFocused] = useState(false);
   const [sucessMark, setSucessMark] = useState(false);
+
   const [placeholder] = useState({
     userName: "Username",
     password: "Password",
@@ -56,10 +57,9 @@ const IndexLoginUserEmail = ({
 
   const handleUserLogin = () => {
     const data = {
-      userName,
-      password,
+      userid: userName,
+      password: password,
     };
-
     setLoading(true);
     validate("username");
     validate("password");
@@ -68,6 +68,7 @@ const IndexLoginUserEmail = ({
       setIsUserNameValid(true);
       setIsPasswordValid(true);
       setLoading(false);
+
       navigation.navigate("HomeStack", { screen: SCREENS.HOME_SCREEN });
     } else {
       setLoading(false);
@@ -75,9 +76,9 @@ const IndexLoginUserEmail = ({
       setIsPasswordValid(false);
       return;
     }
-    console.log("login-->", data);
+    setUserName("");
+    setPassword("");
   };
-
   return (
     <SafeAreaView
       style={[tailwind("flex-1"), { backgroundColor: COLORS.PURPLE_COLOR }]}

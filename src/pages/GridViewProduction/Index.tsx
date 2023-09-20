@@ -15,7 +15,7 @@ import { ResponsiveUi } from "../../components/responsive-ui";
 const IndexGridViewProductionScreen = ({
   navigation,
   route,
-}: RootStackScreenProps<SCREENS.GRIDVIEW_SCREEN>) => {
+}: RootStackScreenProps<SCREENS.GRIDVIEW_PRODUCTION_SCREEN>) => {
   const tailwind = useTailwind();
   const { title }: any = route.params;
   const [page, setPage] = useState<number>(0);

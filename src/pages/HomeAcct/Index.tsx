@@ -18,6 +18,7 @@ import { COLORS } from "../../constants/colors";
 import { SCREENS } from "../../constants/screens";
 import { MetricsSizes, OverviewScreenIcons } from "../../helpers/variables";
 import { RootStackScreenProps } from "../../typings/navigation";
+import StatusBarWrapper from "../../components/StatusBarWrapper";
 
 const IndexUserHomeAccount = ({
   navigation,
@@ -34,17 +35,22 @@ const IndexUserHomeAccount = ({
     }
   }
 
+console.log('text==>')
+
   return (
     <SafeAreaView
-      style={[tailwind("flex-1"), { backgroundColor: COLORS.PURPLE_COLOR }]}
+      style={[tailwind("flex-1"), { backgroundColor: COLORS.LIGHT_GREY }]}
     >
+      <StatusBarWrapper />
       <ScrollView
         showsVerticalScrollIndicator={false}
         contentContainerStyle={[tailwind(" flex-grow"), {}]}
       >
-        <ImageBackground
-          source={backgroundImageDisplay}
-          style={[tailwind("flex-1 items-center justify-center")]}
+        <ContainerWrapper
+          style={[
+            tailwind("flex-1 items-center justify-center"),
+            { backgroundColor: COLORS.LIGHT_GREY },
+          ]}
         >
           <Image
             style={[
@@ -70,23 +76,14 @@ const IndexUserHomeAccount = ({
             <ContainerWrapper
               style={[tailwind("items-center justify-center ml-5 mr-5")]}
             >
-              <ResponsiveUi.Text
-                h1
-                color={COLORS.BLACK}
-                bold
-                style={{ marginVertical: 40 }}
-              >
-                Select your action below
-              </ResponsiveUi.Text>
               <ContainerWrapper
                 style={[
                   tailwind(
-                    "w-full flex-row flex-wrap justify-around mt-5 mb-10",
+                    "w-full flex-row flex-wrap justify-around mt-10 mb-10"
                   ),
                   {
                     paddingHorizontal: MetricsSizes.small,
                     paddingTop: MetricsSizes.medium,
-                    marginTop: -MetricsSizes.medium,
                   },
                 ]}
               >
@@ -105,15 +102,15 @@ const IndexUserHomeAccount = ({
             <TouchableOpacity style={[tailwind("items-center justify-center")]}>
               <MaterialCommunityIcons
                 size={30}
-                color={COLORS.WHITE}
+                color={COLORS.PRIMARY}
                 name="account-outline"
               />
-              <ResponsiveUi.Text h7 bold color={COLORS.WHITE}>
+              <ResponsiveUi.Text h7 bold color={COLORS.PRIMARY}>
                 Log Out
               </ResponsiveUi.Text>
             </TouchableOpacity>
           </ContainerWrapper>
-        </ImageBackground>
+        </ContainerWrapper>
       </ScrollView>
     </SafeAreaView>
   );

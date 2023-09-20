@@ -1,12 +1,13 @@
-import { NavigationContainer } from "@react-navigation/native";
+import React from "react";
 import * as Font from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
-import React from "react";
 import { PaperProvider } from "react-native-paper";
 import { TailwindProvider } from "tailwind-rn";
-
-import { RootNavigation } from "./src/navigation/root-stack";
 import utilities from "./tailwind.json";
+import store from "./Store/store";
+import { navigationRef } from "./src/navigation/utils";
+import { RootNavigation } from "./src/navigation/root-stack";
+import { NavigationContainer } from "@react-navigation/native";
 
 class App extends React.Component {
   constructor(props) {
@@ -40,13 +41,15 @@ class App extends React.Component {
     }
 
     return (
-      <TailwindProvider utilities={utilities}>
-        <NavigationContainer>
-          <PaperProvider>
-            <RootNavigation />
-          </PaperProvider>
-        </NavigationContainer>
-      </TailwindProvider>
+    
+        <TailwindProvider utilities={utilities}>
+          <NavigationContainer ref={navigationRef}>
+            <PaperProvider>
+              <RootNavigation />
+            </PaperProvider>
+          </NavigationContainer>
+        </TailwindProvider>
+   
     );
   }
 }

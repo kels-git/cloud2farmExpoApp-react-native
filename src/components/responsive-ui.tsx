@@ -69,7 +69,7 @@ interface GradientTextProps extends ResponsiveUiTextProps {
 const processTextStyles = (
   props: ResponsiveUiTextProps,
   tailwind: { (_classNames: string): Style },
-  wp: any,
+  wp: any
 ): TextStyle | any => {
   return {
     // DEFAULT COLOR AND FONT

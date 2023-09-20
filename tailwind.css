@@ -111,16 +111,16 @@
   margin-top: 0.5rem
 }
 
-.mt-20 {
-  margin-top: 5rem
-}
-
 .mt-4 {
   margin-top: 1rem
 }
 
 .mt-5 {
   margin-top: 1.25rem
+}
+
+.mt-8 {
+  margin-top: 2rem
 }
 
 .flex {
@@ -161,6 +161,14 @@
 
 .w-full {
   width: 100%
+}
+
+.w-2\/4 {
+  width: 50%
+}
+
+.w-3\/5 {
+  width: 60%
 }
 
 .flex-1 {
@@ -263,6 +271,10 @@
 
 .p-2\.5 {
   padding: 0.625rem
+}
+
+.p-4 {
+  padding: 1rem
 }
 
 .pb-2 {
